@@ -12,5 +12,8 @@ test:
 vet:
 	go vet -n -x $(NAME)
 
+fmt:
+	go fmt $(NAME)
+
 dep-install:
 	go get github.com/dmotylev/goproperties
