@@ -9,5 +9,8 @@ install:
 test:
 	go test -v $(NAME)
 
+vet:
+	go vet -n -x $(NAME)
+
 dep-install:
 	go get github.com/dmotylev/goproperties
