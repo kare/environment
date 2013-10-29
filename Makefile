@@ -17,3 +17,6 @@ fmt:
 
 dep-install:
 	go get github.com/dmotylev/goproperties
+
+clean:
+	go clean $(NAME)
