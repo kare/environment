@@ -27,6 +27,10 @@ func init() {
 	current = StringToEnvironment(*paramEnv)
 }
 
+func Current() *Environment {
+	return current
+}
+
 func StringToEnvironment(s string) *Environment {
 	env := new(Environment)
 	switch strings.ToLower(s) {

@@ -13,8 +13,17 @@ func TestEverything(t *testing.T) {
 	if StringValue("url", "") != "http://www.fi" {
 		t.Error("Url should be 'http://www.fi'")
 	}
+}
+
+func TestConvertStringToEnvironment(t *testing.T) {
 	var env *Environment = StringToEnvironment("Test")
 	if *env != TEST {
-		t.Error("Current environment should be test")
+		t.Error("String converstion to environment failed")
+	}
+}
+
+func TestCurrentEnvironment(t *testing.T) {
+	if *Current() != "dev" {
+		t.Error("Current environment should default to 'dev'")
 	}
 }
