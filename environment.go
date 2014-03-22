@@ -17,42 +17,46 @@ const (
 	PROD Environment = "prod"
 )
 
-var currentEnvironment *string
-var filename *string
+var conf *string
+var current *Environment
 
 func init() {
-	currentEnvironment = flag.String("env", "test", "[dev|test|prod]")
-	filename = flag.String("conf", "environment", "environment.properties file usage message")
+	conf = flag.String("conf", "dev.properties", "Full path to configuration file")
+	paramEnv := flag.String("env", "dev", "Environment [dev|test|prod]")
+	current = StringToEnvironment(*paramEnv)
+}
+
+func StringToEnvironment(s string) *Environment {
+	env := new(Environment)
+	switch strings.ToLower(s) {
+	case "dev":
+		*env = DEV
+		return env
+	case "test":
+		*env = TEST
+		return env
+	case "prod":
+		*env = PROD
+		return env
+	}
+	panic("Environment (dev/test/prod) not defined.")
 }
 
 func LoadProperties() *properties.Properties {
 	flag.Parse()
-	name := fmt.Sprintf("%s-%s.properties", *filename, Current().String())
-	file, err := os.Open(name)
+	file, err := os.Open(*conf)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(2)
+		os.Exit(500)
 	}
 	defer file.Close()
 	p := make(properties.Properties)
 	p.Load(bufio.NewReader(file))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(2)
+		os.Exit(501)
 	}
 	return &p
-}
-
-func Current() Environment {
-	switch strings.ToLower(*currentEnvironment) {
-	case "dev":
-		return DEV
-	case "test":
-		return TEST
-	case "prod":
-		return PROD
-	}
-	panic("Environment (dev/test/prod) not defined.")
 }
 
 func (env Environment) String() string {

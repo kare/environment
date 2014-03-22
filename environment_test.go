@@ -13,7 +13,8 @@ func TestEverything(t *testing.T) {
 	if props.String("url", "") != "http://www.fi" {
 		t.Error("Url should be 'http://www.fi'")
 	}
-	if Current() != TEST {
+	var env *Environment = StringToEnvironment("Test")
+	if *env != TEST {
 		t.Error("Current environment should be test")
 	}
 }
