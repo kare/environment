@@ -2,7 +2,7 @@ package environment
 
 import "testing"
 
-func TestEverything(t *testing.T) {
+func TestStringValue(t *testing.T) {
 	LoadProperties()
 	if StringValue("username", "") != "james" {
 		t.Error("Username should be james")
@@ -12,6 +12,14 @@ func TestEverything(t *testing.T) {
 	}
 	if StringValue("url", "") != "http://www.fi" {
 		t.Error("Url should be 'http://www.fi'")
+	}
+}
+
+func TestNonExistingKey(t *testing.T) {
+	LoadProperties()
+	defaultValue := "abcdef"
+	if StringValue("non-existing-key", defaultValue) != defaultValue {
+		t.Errorf("Should return default value: '%s'", defaultValue)
 	}
 }
 
