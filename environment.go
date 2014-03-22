@@ -17,6 +17,7 @@ const (
 	PROD Environment = "prod"
 )
 
+var props *properties.Properties
 var conf *string
 var current *Environment
 
@@ -56,9 +57,14 @@ func LoadProperties() *properties.Properties {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
 		os.Exit(501)
 	}
+	props = &p
 	return &p
 }
 
 func (env Environment) String() string {
 	return string(env)
+}
+
+func StringValue(key, defaultValue string) string {
+	return props.String(key, defaultValue)
 }
