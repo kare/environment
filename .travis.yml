@@ -1,2 +1,4 @@
 language: go
 install: make dep-install
+go:
+    - 1.2.1
