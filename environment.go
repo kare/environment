@@ -55,7 +55,7 @@ func stringToEnvironment(s string) *Environment {
 	panic("Environment (dev/test/prod) not defined.")
 }
 
-func LoadProperties() *properties.Properties {
+func LoadProperties() {
 	flag.Parse()
 	file, err := os.Open(*conf)
 	if err != nil {
@@ -64,13 +64,12 @@ func LoadProperties() *properties.Properties {
 	}
 	defer file.Close()
 	p := make(properties.Properties)
-	p.Load(bufio.NewReader(file))
+	err = p.Load(bufio.NewReader(file))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
 		os.Exit(501)
 	}
 	props = &p
-	return &p
 }
 
 func (env Environment) String() string {
