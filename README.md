@@ -5,7 +5,7 @@
 * -conf
 	* Path to a properties file. Defaults to dev.properties.
 * -env
-	* Valid values are 'dev', 'test' and 'prod'.
+	* Valid values are 'dev', 'test' and 'prod'. Defaults to 'dev'.
 
 #Usage
 Example:
@@ -20,7 +20,7 @@ import (
 func main() {
 	environment.LoadProperties()
 	username := environment.String("username", "foobar")
-	fmt.Println("Username: ", username)
+	fmt.Println("Username:", username)
 }
 ```
 ```sh
