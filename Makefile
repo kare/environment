@@ -1,13 +1,13 @@
 NAME := github.com/kare/environment
 
+test:
+	go test -v $(NAME)
+
 compile:
 	go build $(NAME)
 
 install:
 	go install $(NAME)
-
-test:
-	go test -v $(NAME)
 
 vet:
 	go vet -n -x $(NAME)
