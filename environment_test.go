@@ -2,15 +2,15 @@ package environment
 
 import "testing"
 
-func TestStringValue(t *testing.T) {
+func TestString(t *testing.T) {
 	LoadProperties()
-	if StringValue("username", "") != "james" {
+	if String("username", "") != "james" {
 		t.Error("Username should be james")
 	}
-	if StringValue("password", "") != "007" {
+	if String("password", "") != "007" {
 		t.Error("Password should be '007'")
 	}
-	if StringValue("url", "") != "http://www.fi" {
+	if String("url", "") != "http://www.fi" {
 		t.Error("Url should be 'http://www.fi'")
 	}
 }
@@ -18,7 +18,7 @@ func TestStringValue(t *testing.T) {
 func TestNonExistingKey(t *testing.T) {
 	LoadProperties()
 	defaultValue := "abcdef"
-	if StringValue("non-existing-key", defaultValue) != defaultValue {
+	if String("non-existing-key", defaultValue) != defaultValue {
 		t.Errorf("Should return default value: '%s'", defaultValue)
 	}
 }

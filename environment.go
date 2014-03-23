@@ -69,6 +69,6 @@ func (env Environment) String() string {
 	return string(env)
 }
 
-func StringValue(key, defaultValue string) string {
+func String(key, defaultValue string) string {
 	return props.String(key, defaultValue)
 }
