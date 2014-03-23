@@ -31,7 +31,7 @@ func TestConvertStringToEnvironment(t *testing.T) {
 }
 
 func TestCurrentEnvironment(t *testing.T) {
-	if *Current() != "dev" {
+	if *Current() != DEV {
 		t.Error("Current environment should default to 'dev'")
 	}
 }
