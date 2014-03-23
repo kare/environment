@@ -27,8 +27,16 @@ func init() {
 	current = stringToEnvironment(*paramEnv)
 }
 
-func Current() *Environment {
-	return current
+func IsDev() bool {
+	return *current == DEV
+}
+
+func IsTest() bool {
+	return *current == TEST
+}
+
+func IsProd() bool {
+	return *current == PROD
 }
 
 func stringToEnvironment(s string) *Environment {
