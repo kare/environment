@@ -69,6 +69,11 @@ func (env Environment) String() string {
 	return string(env)
 }
 
-func String(key, defaultValue string) string {
-	return props.String(key, defaultValue)
+func String(key string) string {
+	const DEFAULT_VALUE = "--default-value--"
+	value := props.String(key, DEFAULT_VALUE)
+	if value == DEFAULT_VALUE {
+		panic(fmt.Sprintf("Property key '%s' not found in file '%s'.", value, *conf))
+	}
+	return value
 }

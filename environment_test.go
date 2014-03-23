@@ -4,23 +4,26 @@ import "testing"
 
 func TestString(t *testing.T) {
 	LoadProperties()
-	if String("username", "") != "james" {
+	if String("username") != "james" {
 		t.Error("Username should be james")
 	}
-	if String("password", "") != "007" {
+	if String("password") != "007" {
 		t.Error("Password should be '007'")
 	}
-	if String("url", "") != "http://www.fi" {
+	if String("url") != "http://www.fi" {
 		t.Error("Url should be 'http://www.fi'")
 	}
 }
 
 func TestNonExistingKey(t *testing.T) {
 	LoadProperties()
-	defaultValue := "abcdef"
-	if String("non-existing-key", defaultValue) != defaultValue {
-		t.Errorf("Should return default value: '%s'", defaultValue)
-	}
+	defer func() {
+		if r := recover(); r != nil {
+			t.Log("Recovered!")
+		}
+	}()
+	value := String("non-existing-key")
+	t.Errorf("'non-existing-key' returned '%s'!", value)
 }
 
 func TestConvertStringToEnvironment(t *testing.T) {
