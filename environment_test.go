@@ -25,7 +25,7 @@ func TestNonExistingKey(t *testing.T) {
 }
 
 func TestConvertStringToEnvironment(t *testing.T) {
-	var env *Environment = StringToEnvironment("Test")
+	var env *Environment = stringToEnvironment("Test")
 	if *env != TEST {
 		t.Error("String converstion to environment failed")
 	}

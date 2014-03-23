@@ -24,14 +24,14 @@ var current *Environment
 func init() {
 	conf = flag.String("conf", "dev.properties", "Full path to configuration file")
 	paramEnv := flag.String("env", "dev", "Environment [dev|test|prod]")
-	current = StringToEnvironment(*paramEnv)
+	current = stringToEnvironment(*paramEnv)
 }
 
 func Current() *Environment {
 	return current
 }
 
-func StringToEnvironment(s string) *Environment {
+func stringToEnvironment(s string) *Environment {
 	env := new(Environment)
 	switch strings.ToLower(s) {
 	case "dev":
