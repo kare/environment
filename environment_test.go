@@ -18,9 +18,7 @@ func TestString(t *testing.T) {
 func TestNonExistingKey(t *testing.T) {
 	LoadProperties()
 	defer func() {
-		if r := recover(); r != nil {
-			t.Log("Recovered!")
-		}
+		recover()
 	}()
 	value := String("non-existing-key")
 	t.Errorf("'non-existing-key' returned '%s'!", value)
