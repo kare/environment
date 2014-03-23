@@ -29,3 +29,10 @@ username=root
 $ ./main -conf example-dev.properties -env dev
 Username: root
 ```
+
+#Development
+```sh
+$ make dep-install
+$ vim
+$ make test
+```
