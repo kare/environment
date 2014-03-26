@@ -55,11 +55,19 @@ func stringToEnvironment(s string) *Environment {
 	panic("Environment (dev/test/prod) not defined.")
 }
 
+func getCwd() string {
+	pwd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	return pwd
+}
+
 func LoadProperties() {
 	flag.Parse()
 	file, err := os.Open(*conf)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
+		fmt.Fprintf(os.Stderr, "%s/%s: %s\n", getCwd(), *conf, err)
 		os.Exit(500)
 	}
 	defer file.Close()
